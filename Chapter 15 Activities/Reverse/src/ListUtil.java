@@ -13,7 +13,9 @@ public class ListUtil
     public static void reverse(LinkedList<String> strings)
     {
         for (int i = 0; i < strings.size() / 2; i++){
-            
+            String store = strings.get(i);
+            strings.set(i, strings.get(strings.size() - 1 - i));
+            strings.set(strings.size() - 1 - i, store);
         }
     }
 }
