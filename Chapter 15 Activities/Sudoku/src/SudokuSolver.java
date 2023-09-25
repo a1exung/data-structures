@@ -36,10 +36,26 @@ public class SudokuSolver {
         }
 
         // create the list of sets for each row (this.rows)
-        // ...
+        rows = new ArrayList<>();
+        for (int i = 0; i < N; i++){
+            Set<Integer> row = new HashSet<>();
+            for (int j = 0; j< N; j++){
+                row.add(grid[i][j]);
+            }
+           this.rows.add(row);
+        }
 
         // create the list of sets for each col (this.cols)
-        // ...
+        cols = new ArrayList<>();
+        for (int i = 0; i < N; i++){
+            Set<Integer> col = new HashSet<>();
+            for (int j = 0; j< N; j++){
+                if (grid[j][i] != 0){
+                    col.add(grid[j][i]);
+                }
+            }
+            this.cols.add(col);
+        }
 
         // create the list of sets for each square (this.squares)
         /* the squares are added to the list row-by-row:
@@ -47,10 +63,22 @@ public class SudokuSolver {
             3 4 5
             6 7 8
          */
-        // ...
+        squares = new ArrayList<>();
+        for (int i = 0; i < N; i++){
+            Set<Integer> square = new HashSet<>();
+            for (int j = i / M * M; j < i / M * M + M; j++){
+                for (int k = i % M * M; k < i % M * M + M; k++){
+                    square.add(grid[j][k]);
+                }
+            }
+            this.squares.add(square);
+        }
 
         // create a hash set for [1..9] (this.nums)
-        // ...
+        nums = new HashSet<>();
+        for (int i = 0; i < N; i++){
+            nums.add(i);
+        }
 
         // visually inspect that all the sets are correct
         for (int row = 0; row < N; row++) {
@@ -97,7 +125,9 @@ public class SudokuSolver {
         Set<Integer> possibleNums = new HashSet<Integer>();
         possibleNums.addAll(this.nums);
         
-        // ...
+        possibleNums.removeAll(rows.get(nextRow));
+        possibleNums.removeAll(cols.get(nextCol));
+        possibleNums.removeAll(squares.get(nextRow % 3 * 3 + nextCol / 3); // <-- THIS IS WHERE I STOPPED WORKING FIX THIS LINE
 
         // if there are no possible numbers, we cannot solve the board in its current state
         if (possibleNums.isEmpty()) {
@@ -141,7 +171,7 @@ public class SudokuSolver {
     }
 
     public static void main(String[] args) {
-        String fileName = "src/puzzle1.txt";
+        String fileName = "C:\\Users\\ajung\\Desktop\\SWE\\data-structures\\Chapter 15 Activities\\Sudoku\\src\\puzzle1.txt";
 
         SudokuSolver solver = new SudokuSolver(fileName);
         System.out.println(solver);
