@@ -121,54 +121,12 @@ public class SudokuSolver {
             algorithm is correct.
          */
 
-
-         //method for calculating the index of the square
-        int square = -1;
-        if (nextRow < 3){
-            switch (nextCol / 3){
-                case 0:
-                    square = 0;
-                    break;
-                case 1:
-                    square = 1;
-                    break;
-                case 2:
-                    square = 2;
-                    break;
-            }
-        } else if (nextRow < 6){
-            switch (nextCol / 3){
-                case 0:
-                    square = 3;
-                    break;
-                case 1:
-                    square = 4;
-                    break;
-                case 2:
-                    square = 5;
-                    break;
-            }
-        } else {
-            switch (nextCol / 3){
-                case 0:
-                    square = 6;
-                    break;
-                case 1:
-                    square = 7;
-                    break;
-                case 2:
-                    square = 8;
-                    break;
-            }
-        }
-        
-
         Set<Integer> possibleNums = new HashSet<Integer>();
         possibleNums.addAll(this.nums);
         
         possibleNums.removeAll(this.rows.get(nextRow));
         possibleNums.removeAll(this.cols.get(nextCol));
-        possibleNums.removeAll(this.squares.get(square)); 
+        possibleNums.removeAll(this.squares.get(nextRow / M * M + nextCol / M)); 
 
         // if there are no possible numbers, we cannot solve the board in its current state
         if (possibleNums.isEmpty()) {
@@ -181,7 +139,7 @@ public class SudokuSolver {
             this.grid[nextRow][nextCol] = possibleNum;
             this.rows.get(nextRow).add(possibleNum);
             this.cols.get(nextCol).add(possibleNum);
-            this.squares.get(square).add(possibleNum);
+            this.squares.get(nextRow / M * M + nextCol / M).add(possibleNum);
 
             // recursively solve the board
             if (this.solve()) {
@@ -191,7 +149,7 @@ public class SudokuSolver {
                 this.grid[nextRow][nextCol] = 0;
                 this.rows.get(nextRow).remove(possibleNum);
                 this.cols.get(nextCol).remove(possibleNum);
-                this.squares.get(square).remove(possibleNum);
+                this.squares.get(nextRow / M * M + nextCol / M).remove(possibleNum);
             }
         }
 
