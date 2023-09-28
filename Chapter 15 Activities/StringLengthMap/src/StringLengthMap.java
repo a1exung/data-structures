@@ -18,7 +18,6 @@ public class StringLengthMap
         {
 
             // Create your map here
-            
 
             while (in.hasNext())
             {
