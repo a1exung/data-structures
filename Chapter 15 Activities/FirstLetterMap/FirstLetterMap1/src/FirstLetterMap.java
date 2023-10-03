@@ -30,7 +30,7 @@ public class FirstLetterMap
                 // Update the map here
                 // Use the Java 8 merge method
                 
-                firstLetters.merge(c, new TreeSet<>(), (oldValue, newValue) -> newValue);
+                firstLetters.merge(c, new TreeSet<>(Arrays.asList(word)), (oldValue, newValue) -> {oldValue.add(word); return oldValue;});
 
             }
 
