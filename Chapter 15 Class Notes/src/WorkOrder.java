@@ -19,7 +19,7 @@ public class WorkOrder implements Comparable
 
    public String toString()
    {
-      return "priority=" + priority + ", description=" + description;
+      return "priority = " + priority + ", description = " + description;
    }
 
    public int compareTo(Object otherObject)
