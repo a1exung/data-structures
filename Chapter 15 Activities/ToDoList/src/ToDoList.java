@@ -1,5 +1,4 @@
-import java.util.PriorityQueue;
-import java.util.Scanner;
+import java.util.*;
 /**
  * Implement a to do list. Tasks have a priority between 
  * 1 and 9 (with 1 being most urgent), and a description.
@@ -12,7 +11,7 @@ import java.util.Scanner;
 public class ToDoList
 {
     // Instance variable(s)
-    
+    Queue<Task> list;
 
     /**
      * Constructor
@@ -20,7 +19,7 @@ public class ToDoList
     public ToDoList()
     {
         // Complete this
-        
+        list = new PriorityQueue<>();
     }
 
     /**
@@ -60,8 +59,21 @@ public class ToDoList
     public void addTask(String optionStr)
     {
         // Complete this method
+        if(optionStr.substring(optionStr.indexOf(" ")+1,optionStr.indexOf(" ")+2).equals("1") || 
+            optionStr.substring(optionStr.indexOf(" ")+1,optionStr.indexOf(" ")+2).equals("2") || 
+            optionStr.substring(optionStr.indexOf(" ")+1,optionStr.indexOf(" ")+2).equals("3") || 
+            optionStr.substring(optionStr.indexOf(" ")+1,optionStr.indexOf(" ")+2).equals("4") || 
+            optionStr.substring(optionStr.indexOf(" ")+1,optionStr.indexOf(" ")+2).equals("5") || 
+            optionStr.substring(optionStr.indexOf(" ")+1,optionStr.indexOf(" ")+2).equals("6") || 
+            optionStr.substring(optionStr.indexOf(" ")+1,optionStr.indexOf(" ")+2).equals("7") || 
+            optionStr.substring(optionStr.indexOf(" ")+1,optionStr.indexOf(" ")+2).equals("8") || 
+            optionStr.substring(optionStr.indexOf(" ")+1,optionStr.indexOf(" ")+2).equals("9"))
         
-            
+        list.add(new Task(Integer.valueOf(optionStr.substring(optionStr.indexOf(" ")+1,optionStr.indexOf(" ")+2)), optionStr.substring(optionStr.indexOf(" ")+3)));
+
+        else
+            System.out.println("The priority must be an integer between 1 and 9.");
+        
             
     }
 
@@ -74,8 +86,8 @@ public class ToDoList
         Task next = null;
         
         // Complete this method
-        . . .
-        
+        if(!list.isEmpty())
+            next = list.remove();
         
         if (next == null)
         {

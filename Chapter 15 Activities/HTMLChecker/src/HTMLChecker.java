@@ -22,7 +22,7 @@ public class HTMLChecker
         try (Scanner in = new Scanner(new File(filename)))
         {
             // Your code goes here
-            . . .
+            
 
 
         } catch (FileNotFoundException e)
