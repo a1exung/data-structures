@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class ToDoList
 {
     // Instance variable(s)
-    . . .
+    
 
     /**
      * Constructor
@@ -20,7 +20,7 @@ public class ToDoList
     public ToDoList()
     {
         // Complete this
-        . . .
+        
     }
 
     /**
@@ -60,7 +60,7 @@ public class ToDoList
     public void addTask(String optionStr)
     {
         // Complete this method
-        . . .
+        
             
             
     }
