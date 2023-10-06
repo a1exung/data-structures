@@ -17,10 +17,12 @@ public class Grid
 
         while (pairs.size() > 0){
             pair p = pairs.pop();
-            pixels[p.getRow()][p.getCol()] = count;
-            count++;
+            if (pixels[p.getRow()][p.getCol()] == 0){
+                pixels[p.getRow()][p.getCol()] = count;
+                count++;
+            }
 
-            if (p.getRow() + 1 < 10 && pixels[p.getRow() + 1][p.getCol()] == 0 && !pairs.contains()){
+            if (p.getRow() + 1 < 10 && pixels[p.getRow() + 1][p.getCol()] == 0){
                 pairs.push(new pair(p.getRow() + 1, p.getCol()));
             }
             if (p.getCol() + 1 < 10 && pixels[p.getRow()][p.getCol() + 1] == 0){
