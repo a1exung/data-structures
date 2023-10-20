@@ -40,8 +40,6 @@ public class LinkedList
         @return If the object exists in the list.
     */
     public boolean contains(Object obj){
-        if (first == null)
-            return false;
         return contains(first, obj);
     }
 
@@ -54,13 +52,12 @@ public class LinkedList
     */
     public boolean contains(Node start, Object obj)
     {
+        if ((start == null) || (obj == null)){
+            return false;
+        }
         if (start.data.equals(obj))
             return true;
-        if (start.next == null)
-            return false;
-
-        contains(start.next, obj);
-        return false;
+        return contains(start.next, obj);
     }
 
     /**
