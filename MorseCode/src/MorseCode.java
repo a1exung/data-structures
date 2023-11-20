@@ -84,21 +84,50 @@ public class MorseCode
      */
     private static void treeInsert(char letter, String code)
     {
-        treeInsert(letter, code, decodeTree);   
-    }
+        TreeNode current = decodeTree;
+        int count = 0;
+        while (count < code.length() - 1){
 
-    private static void treeInsert(char letter, String code, TreeNode node){
-        int levelCount = 0;
-        TreeNode parent = node; 
+            if (code.charAt(count) == '.'){
 
-        if (code.charAt(levelCount) == '.'){
-            if (parent.getLeft() == null){
-                parent.setLeft(new TreeNode(letter, null, null));
-            } else {
-                treeInsert(letter, code, parent.getLeft());
+                if (current.getLeft() == null){
+                    current.setLeft(new TreeNode(" "));
+                } 
+
+                current = current.getLeft();
+
+            } else if (code.charAt(count) == '-'){
+
+                if (current.getRight() == null){
+                    current.setRight(new TreeNode(" "));
+                }
+                current = current.getRight();
+
             }
-        } 
+
+            count++;
+        }
+
+        if (code.charAt(count) == '.'){
+
+            if (current.getLeft() == null){
+                current.setLeft(new TreeNode(letter));
+            } else {
+                current.getLeft().setValue(letter);
+            }
+
+        } else if (code.charAt(count) == '-'){
+
+            if (current.getRight() == null){
+                current.setRight(new TreeNode(letter));
+            } else {
+                current.getRight().setValue(letter);
+            }
+
+        }
     }
+
+    
 
     /**
      * Converts text into a Morse code message.  Adds a space after a dot-dash
@@ -110,9 +139,7 @@ public class MorseCode
     {
         StringBuffer morse = new StringBuffer(400);
 
-        /*
-            !!! INSERT CODE HERE
-        */
+        
 
         return morse.toString();
     }
