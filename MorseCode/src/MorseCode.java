@@ -16,6 +16,7 @@ public class MorseCode
         MorseCode.start();  
         System.out.println(MorseCode.encode("Watson come here"));
         BTreePrinter.printNode(decodeTree);
+        
     }
 
     public static void start()
@@ -139,6 +140,17 @@ public class MorseCode
     {
         StringBuffer morse = new StringBuffer(400);
 
+
+        for (int i = 0; i < text.length(); i++){
+            if (text.charAt(i) == ' '){
+                
+                morse.append("  ");
+                
+            } else {
+
+                morse.append((String) codeMap.get(Character.toUpperCase(text.charAt(i))) + " ");
+            }
+        }
         
 
         return morse.toString();
@@ -152,11 +164,26 @@ public class MorseCode
      */
     public static String decode(String morse)
     {
+
         StringBuffer text = new StringBuffer(100);
 
-        /*
-            !!! INSERT CODE HERE
-        */
+        TreeNode current = decodeTree;
+
+        for (int i = 0; i < morse.length(); i++)
+        {
+            if (morse.charAt(i) == ' ')
+            {
+                text.append(current.getValue());
+                current = decodeTree;
+            }
+            else if (morse.charAt(i) == DOT)
+
+                current = current.getLeft();
+
+            else if (morse.charAt(i) == DASH)
+
+                current = current.getRight();
+        }
 
         return text.toString();
     }
